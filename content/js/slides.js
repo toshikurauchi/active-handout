@@ -1,32 +1,34 @@
-{
-    let current_document = window.location.href;
-    let last_slash = current_document.lastIndexOf("/");
+"use strict";
 
-    let slide_path = "";
-    if (last_slash == current_document.length-1) {
-        slide_path = current_document + "slides.pdf";
-    } else {
-        slide_path = current_document.substring(0, last_slash) + "/slides.pdf";
-    }
-    
-    let xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", function(ev) {
-        if (xhr.status == 200) {       
-            let emb = document.createElement("embed");
-            emb.src = slide_path;
-            emb.width = 500;
-            emb.height = 375;
-            emb.type = "application/pdf";
-            
-            let div_center = document.createElement("div");
-            div_center.style = "text-align: center";
-            div_center.className = "no-print";
-            div_center.appendChild(emb);
-            
-            document.querySelector("h1").insertAdjacentElement("afterend", div_center);
-        }
-    });
-    xhr.open("head", slide_path);
-    xhr.send();
+var _templateObject = _taggedTemplateLiteral(["\n  text-align: center;\n"], ["\n  text-align: center;\n"]);
 
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+import PdfEmbed from "./components/PdfEmbed/index.js";
+
+var current_document = window.location.href;
+var last_slash = current_document.lastIndexOf("/");
+
+var slide_path = "";
+if (last_slash == current_document.length - 1) {
+  slide_path = current_document + "slides.pdf";
+} else {
+  slide_path = current_document.substring(0, last_slash) + "/slides.pdf";
 }
+
+var Container = window.styled.div(_templateObject);
+
+fetch(slide_path, { method: "HEAD" }).then(function (response) {
+  return response.status;
+}).then(function (st) {
+  if (st == 200) {
+    var container = document.createElement("div");
+    document.querySelector("h1").insertAdjacentElement("afterend", container);
+
+    ReactDOM.render(React.createElement(
+      Container,
+      { className: "no-print" },
+      React.createElement(PdfEmbed, { src: slide_path })
+    ), container);
+  }
+});

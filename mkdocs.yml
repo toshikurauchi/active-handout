@@ -16,15 +16,20 @@ edit_uri: edit/main/content/
 nav:
   - Home: index.md
   - Reference:
-    - reference/basic-editing/index.md
-    - reference/advanced-editing/index.md
-    - reference/slides/index.md
-    - reference/quiz/index.md
-    - reference/short-questions/index.md
-    - reference/progress-check/index.md
+      - reference/basic-editing/index.md
+      - reference/advanced-editing/index.md
+      - reference/slides/index.md
+      - reference/quiz/index.md
+      - reference/short-questions/index.md
+      - reference/progress-check/index.md
 
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
+  - https://unpkg.com/react@17/umd/react.production.min.js
+  - https://unpkg.com/react-dom@17/umd/react-dom.production.min.js
+  - https://unpkg.com/prop-types@15.6/prop-types.min.js
+  - https://unpkg.com/react-is@16.8.3/umd/react-is.production.min.js
+  - https://unpkg.com/styled-components/dist/styled-components.min.js
   - js/markdown-enhancer.js
 
 markdown_extensions:
@@ -47,5 +52,5 @@ markdown_extensions:
       emoji_generator: !!python/name:pymdownx.emoji.to_svg
   - attr_list
 
-plugins: 
+plugins:
   - git-revision-date-localized
