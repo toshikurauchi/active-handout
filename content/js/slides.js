@@ -23,12 +23,13 @@ fetch(slide_path, {'method': 'HEAD'}).then((response) => {
     return response.status;
 }).then((st) => {
     if (st == 200) {
-        let div_center = document.createElement("div");
-        div_center.style = "text-align: center";
-        div_center.className = "no-print";
+        let container = document.createElement('div');
 
-        render(html`<${PdfEmbed} src=${slide_path} />`, div_center);
+        render(html`
+        <div style="text-align: center;" class="no-print">
+            <${PdfEmbed} src=${slide_path} />
+        </div>`, container);
         
-        document.querySelector("h1").insertAdjacentElement("afterend", div_center);
+        document.querySelector("h1").insertAdjacentElement("afterend", container);
     }
 });
